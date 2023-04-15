@@ -5,7 +5,14 @@ from sklearn.metrics import accuracy_score
 
 
 df = pd.read_csv('./African projects Dataset.csv')
-# one-hot encode the categorical variables
+
+# count total NaN values across all columns
+print('empty values',df.isna().sum().sum())
+
+# drop empty values
+df.dropna(inplace=True)
+
+# one-hot method to encode the categorical variables
 df = pd.get_dummies(df, columns=["regionname","countryname","lendinginstr"])
 
 X = df.drop(['project result'], axis=1)
